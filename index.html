@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaffati Property Kediri - PT Sekar Pamenang</title>
+    <style>
+        /* --- 1. PENGATURAN DASAR --- */
+        :root {
+            --primary-green: #064e3b; 
+            --light-green: #10b981;   
+            --accent-yellow: #f59e0b; 
+            --text-dark: #1f2937;
+            --white: #ffffff;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        
+        body { line-height: 1.6; color: var(--text-dark); background-color: #f9f9f9; padding-top: 70px; }
+
+        /* --- 2. HEADER --- */
+        header {
+            background-color: var(--primary-green);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--white); cursor: pointer; }
+        .logo span { color: var(--accent-yellow); }
+        
+        /* --- 3. UTILITY (UNTUK PINDAH HALAMAN) --- */
+        .hidden { display: none !important; }
+        .fade-in { animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* --- 4. HOMEPAGE STYLES --- */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(6, 78, 59, 0.7), rgba(6, 78, 59, 0.7)), url('');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            color: var(--white);
+        }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .btn-cta {
+            background-color: var(--accent-yellow);
+            color: var(--primary-green);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            display: inline-block;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-cta:hover { background-color: #d97706; color: white; transform: translateY(-3px); }
+
+        .container { width: 90%; max-width: 1200px; margin: auto; padding-bottom: 4rem; }
+        .section-title { text-align: center; margin: 3rem 0 1rem; color: var(--primary-green); }
+        
+        .cluster-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .cluster-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-bottom: 4px solid var(--accent-yellow);
+            transition: 0.3s;
+        }
+        .cluster-card:hover { transform: translateY(-5px); }
+        .card-img { height: 200px; width: 100%; background-size: cover; background-position: center; }
+        .card-content { padding: 1.5rem; }
+        .card-title { color: var(--primary-green); font-size: 1.25rem; font-weight: bold; }
+        .card-price { color: var(--accent-yellow); font-weight: bold; display: block; margin: 5px 0 15px; }
+        
+        .btn-detail {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-detail:hover { background-color: var(--primary-green); color: white; }
+
+        /* --- 5. DETAIL PAGE STYLES --- */
+        .detail-header {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+        .detail-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+        .spec-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        .spec-table tr { border-bottom: 1px solid #eee; }
+        .spec-table td { padding: 12px; }
+        .spec-table td:first-child { font-weight: bold; color: var(--primary-green); width: 30%; }
+        
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: var(--primary-green);
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-wa-detail {
+            background-color: #25d366;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            display: block;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 2rem;
+        }
+
+        /* --- 6. FOOTER --- */
+        footer {
+            background-color: var(--primary-green);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .detail-img { height: 250px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo" onclick="goHome()">KAFFATI <span>PROPERTY</span></div>
+    </header>
+
+    <div id="home-view" class="fade-in">
+        
+        <section class="hero">
+            <div>
+                <h1>Hunian Nyaman dengan potensi Investasi Menjanjikan</h1>
+                <p>Wujudkan impian keluarga Anda bersama Kaffati Property. Desain modern, lingkungan hijau, dan nilai investasi tinggi</p>
+		<p>Rumah Premium - SIAP SURVEY HARI INI<p>
+                <br>
+                <div class="btn-cta" onclick="document.getElementById('cluster-list').scrollIntoView()">Unit Tersedia</div>
+            </div>
+        </section>
+
+        <div class="container" id="cluster-list">
+            <h2 class="section-title">Pilihan Cluster Unggulan</h2>
+            
+            <div class="cluster-grid">
+                <div class="cluster-card">
+                    <div class="card-img" style="background-image: url('images/sophia.PNG'); height: 250px; width: 100%; 
+			background-size: cover; background-position: bottom center;"></div>
+                    <div class="card-content">
+                        <div class="card-title">Cluster Shopia</div>
+                        <span class="card-price">Mulai Rp 650 Juta'an</span>
+                        <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">2 Lantai - Live better. Invest Smarter. Experience The Best Rising 				Potential Today.</p>
+                        <button class="btn-detail" onclick="showDetail('sophia')">Lihat Detail & Spesifikasi</button>
+                    </div>
+                </div>
+
+                <div class="cluster-card">
+                    <div class="card-img" style="background-image: url('images/omar.PNG'); height: 250px; width: 100%; 
+			background-size: cover; background-position: bottom center;"></div>
+                    <div class="card-content">
+                        <div class="card-title">Cluster Omar Inside</div>
+                        <span class="card-price">Mulai Rp 700 Juta'an</span>
+                        <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">2 Lantai - Live Effortless Everyday, On A Masterpiece, Close to 				Nature.</p>
+                        <button class="btn-detail" onclick="showDetail('omarInside')">Lihat Detail & Spesifikasi</button>
+                    </div>
+                </div>
+
+                <div class="cluster-card">
+                    <div class="card-img" style="background-image: url('images/resort1.PNG'); height: 250px; width: 100%; 
+			background-size: cover; background-position: bottom center;"></div>
+                    <div class="card-content">
+                        <div class="card-title">Cluster Omar Resort</div>
+                        <span class="card-price">Mulai Rp 1.1 Milyar</span>
+                        <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">Home Resort 2 Lantai - More Than A House, It's A Home Resort.</p>
+                        <button class="btn-detail" onclick="showDetail('omarResort')">Lihat Detail & Spesifikasi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="detail-view" class="container hidden fade-in" style="margin-top: 2rem;">
+        <div class="btn-back" onclick="goHome()">← Kembali ke Daftar Cluster</div>
+        
+        <div class="detail-header">
+            <img id="d-img" src="" class="detail-img" alt="Foto Rumah">
+            
+            <h1 id="d-title" style="color: var(--primary-green);">Nama Cluster</h1>
+            <h3 id="d-price" style="color: var(--accent-yellow); margin-bottom: 1rem;">Harga</h3>
+            <p id="d-desc">Deskripsi singkat rumah...</p>
+            
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #ddd;">
+            
+            <p style="color: #dc2626; font-size: 0.8rem; font-style: italic; margin-bottom: 10px; line-height: 1.4;">
+                Disclaimer : Spesifikasi material hanya merupakan ilustrasi perbandingan. Bukan menjadi acuan dasar transaksi, acuan dasar adalah dokumen 			     SPU, Denah dan Biaya yang di tandatangani saat finalisasi desain rumah Anda.
+            </p>
+
+            <h3 style="color: var(--primary-green);">Spesifikasi Teknis</h3>
+            <table class="spec-table">
+                <tbody id="d-specs">
+                    </tbody>
+            </table>
+
+            <a id="d-wa" href="#" target="_blank" class="btn-wa-detail">
+                📞 Hubungi Marketing & Jadwalkan Survey
+            </a>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 Kaffati Property Kediri - Member of PT Sekar Pamenang</p>
+    </footer>
+
+    <script>
+        // Data Cluster (Edit data di sini jika ingin mengubah isi)
+        const clusters = {
+            'sophia': {
+                title: "Cluster Shopia (2 Lantai)",
+                price: "Mulai Rp 650 Juta'an",
+                img: "images/sophia.PNG",
+                desc: "Hunian minimalis modern yang sangat cocok untuk keluarga baru. Dengan desain efisien dan lokasi strategis dekat pusat kota Kediri.",
+                specs: `
+                    <tr><td>Luas Bangunan</td><td>50 m²</td></tr>
+                    <tr><td>Luas Tanah</td><td>72 m²</td></tr>
+                    <tr><td>Kamar Tidur</td><td>2</td></tr>
+                    <tr><td>Kamar Mandi</td><td>1</td></tr>
+                    <tr><td>Pondasi</td><td>Kumbung dan beton bertulang</td></tr>
+                    <tr><td>Lantai</td><td>Granit tile 60x60</td></tr>
+                    <tr><td>Listrik</td><td>2200 Watt</td></tr>
+                    <tr><td>Air</td><td>PDAM</td></tr>
+                `
+            },
+            'omarInside': {
+                title: "Cluster Omar Inside (2 Lantai)",
+                price: "Mulai Rp 700 Juta'an",
+                img: "images/omar.PNG",
+                desc: "Rumah 2 lantai dengan konsep compact living. Memaksimalkan ruang untuk kenyamanan keluarga Anda di lingkungan yang asri.",
+                specs: `
+                    <tr><td>Luas Bangunan</td><td>50 m² (2 Lantai)</td></tr>
+                    <tr><td>Luas Tanah</td><td>72 m²</td></tr>
+                    <tr><td>Kamar Tidur</td><td>2 (Bisa Upgrade)</td></tr>
+                    <tr><td>Kamar Mandi</td><td>1</td></tr>
+                    <tr><td>Dinding</td><td>Bata Ringan (Plester Aci finishing cat)</td></tr>
+                    <tr><td>Atap</td><td>Baja Ringan</td></tr>
+                    <tr><td>Listrik</td><td>2200 Watt</td></tr>
+                `
+            },
+            'omarResort': {
+                title: "Cluster Omar Home Resort (2 Lantai)",
+                price: "Mulai Rp 1.1 Milyar",
+                img: "images/resort1.PNG",
+                desc: "Hunian premium berkonsep Home Resort. Nikmati suasana liburan setiap hari di rumah sendiri dengan material kualitas terbaik.",
+                specs: `
+                    <tr><td>Luas Bangunan</td><td>53 m²</td></tr>
+                    <tr><td>Luas Tanah</td><td>91 m² (Hook Tersedia)</td></tr>
+                    <tr><td>Kamar Tidur</td><td>2</td></tr>
+                    <tr><td>Kamar Mandi</td><td>1 (Premium Sanitary)</td></tr>
+                    <tr><td>Lantai</td><td>Granit tile 60x60</td></tr>
+                    <tr><td>Fasilitas</td><td>Smart Home</td></tr>
+                    <tr><td>Listrik</td><td>2200 Watt</td></tr>
+                `
+            }
+        };
+
+        // Fungsi Pindah ke Halaman Detail
+        function showDetail(id) {
+            const data = clusters[id];
+            
+            // --- BAGIAN PERBAIKAN GAMBAR ---
+            const imgElement = document.getElementById('d-img');
+            imgElement.src = data.img;
+            
+            // ATURAN BARU: Fokus ke bawah & potong bagian atas
+            imgElement.style.width = "100%";
+            imgElement.style.height = "800px";        // PENTING: Kunci tingginya (misal 300px) agar efek potong bekerja
+            imgElement.style.objectFit = "cover";     // 'cover' = penuhi kotak (potong sisa gambar)
+            imgElement.style.objectPosition = "bottom center"; // Fokuskan pandangan ke bagian BAWAH (rumah)
+            // -------------------------------
+
+            // Isi data teks lainnya
+            document.getElementById('d-title').innerText = data.title;
+            document.getElementById('d-price').innerText = data.price;
+            document.getElementById('d-desc').innerText = data.desc;
+            document.getElementById('d-specs').innerHTML = data.specs;
+            
+            // Update Link WA agar otomatis menyebut nama cluster
+            const waNumber = "6285707382270"; // Ganti No HP Anda di sini
+            const message = `Halo Kaffati Property, saya ingin info detail tentang ${data.title}`;
+            document.getElementById('d-wa').href = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+
+            // Sembunyikan Home, Tampilkan Detail
+            document.getElementById('home-view').classList.add('hidden');
+            document.getElementById('detail-view').classList.remove('hidden');
+            
+            // Scroll ke atas
+            window.scrollTo(0, 0);
+        }
+
+        // Fungsi Kembali ke Home
+        function goHome() {
+            document.getElementById('detail-view').classList.add('hidden');
+            document.getElementById('home-view').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+</body>
+</html>
